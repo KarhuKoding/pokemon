@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import {
   SimpleGrid,
   Card,
@@ -10,10 +10,14 @@ import {
   AspectRatio,
 } from "@mantine/core";
 import { API_BASE_URL } from "../misc/constants";
+import { Pagination } from "@mantine/core";
+import { TOTAL_PAGES } from "../misc/constants";
+import { generateOffsetUrl } from "../misc/helpers";
 
 export default function Home(props: any) {
   const { pokemon } = props;
   const router = useRouter();
+  const [activePage, setPage] = useState(1);
 
   const handleClick = (pokemonName: string) => {
     router.push("./" + pokemonName);
@@ -54,26 +58,27 @@ export default function Home(props: any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>Pokemon App</main>
+      <main>
+        <h1>Pokemon App</h1>
+        <Pagination value={activePage} onChange={setPage} total={TOTAL_PAGES} />
 
-      <div>
-        <Container py="xl">
-          <SimpleGrid cols={2}>{pokemonCards}</SimpleGrid>
-        </Container>
-      </div>
+        <div>
+          <Container py="xl">
+            <SimpleGrid cols={2}>{pokemonCards}</SimpleGrid>
+          </Container>
+        </div>
+      </main>
     </>
   );
 }
 
 // NEXT.JS
 
-const ALL_POKEMON = "pokemon?limit=100000&offset=0";
-const FIRST_15 = "pokemon?limit=15&offset=0";
-
 // TODO create helper function to generate URL
 
 export async function getStaticProps() {
-  const url = API_BASE_URL + FIRST_15;
+  // Static Generation for only 15 items not good for SEO
+  const url = API_BASE_URL + generateOffsetUrl(15);
 
   const res = await fetch(url);
   const data = await res.json();

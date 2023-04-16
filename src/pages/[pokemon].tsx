@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { API_BASE_URL } from "@/misc/constants";
 import { get } from "lodash";
+import Head from "next/head";
 
 interface PokemonDetailData {
   species: string;
@@ -40,39 +41,44 @@ export default function DetailPage() {
   const pokemonDetails = getDetails(data);
 
   return (
-    <div>
-      <div onClick={() => router.back()} style={{ cursor: "pointer" }}>
-        <h1>&#8592; Go Back</h1>
+    <React.Fragment>
+      <Head>
+        <title>PokemonApp - {pokemonName}</title>
+      </Head>
+      <div>
+        <div onClick={() => router.back()} style={{ cursor: "pointer" }}>
+          <h1>&#8592; Go Back</h1>
+        </div>
+        <h1>{pokemonName}</h1>
+        <section>
+          <div>Species: {pokemonDetails.species}</div>
+          <ul>
+            Stats:
+            {pokemonDetails.stats.map((stat) => {
+              return (
+                <li key={stat.stat.name}>
+                  <strong>{stat.stat.name} </strong>Base: {stat.base_stat},
+                  Effort: {stat.effort}
+                </li>
+              );
+            })}
+          </ul>
+          <ul>
+            Types:
+            {pokemonDetails.types.map((type) => {
+              return <li key={type.type.name}>{type.type.name}</li>;
+            })}
+          </ul>
+          <div>Weight: {pokemonDetails.weight}</div>
+          <p>
+            Moves:
+            <br />
+            {pokemonDetails.moves.map((move) => {
+              return <span key={move.move.name}>{move.move.name} /</span>;
+            })}
+          </p>
+        </section>
       </div>
-      <h1>{pokemonName}</h1>
-      <section>
-        <div>Species: {pokemonDetails.species}</div>
-        <ul>
-          Stats:
-          {pokemonDetails.stats.map((stat) => {
-            return (
-              <li key={stat.stat.name}>
-                <strong>{stat.stat.name} </strong>Base: {stat.base_stat},
-                Effort: {stat.effort}
-              </li>
-            );
-          })}
-        </ul>
-        <ul>
-          Types:
-          {pokemonDetails.types.map((type) => {
-            return <li key={type.type.name}>{type.type.name}</li>;
-          })}
-        </ul>
-        <div>Weight: {pokemonDetails.weight}</div>
-        <p>
-          Moves:
-          <br />
-          {pokemonDetails.moves.map((move) => {
-            return <span key={move.move.name}>{move.move.name} /</span>;
-          })}
-        </p>
-      </section>
-    </div>
+    </React.Fragment>
   );
 }
