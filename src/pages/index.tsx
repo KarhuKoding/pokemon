@@ -9,6 +9,7 @@ import {
   Container,
   AspectRatio,
 } from "@mantine/core";
+import { API_BASE_URL } from "../misc/constants";
 
 export default function Home(props: any) {
   const { pokemon } = props;
@@ -66,14 +67,13 @@ export default function Home(props: any) {
 
 // NEXT.JS
 
-const BASE_URL = "https://pokeapi.co/api/v2/";
 const ALL_POKEMON = "pokemon?limit=100000&offset=0";
 const FIRST_15 = "pokemon?limit=15&offset=0";
 
 // TODO create helper function to generate URL
 
 export async function getStaticProps() {
-  const url = BASE_URL + FIRST_15;
+  const url = API_BASE_URL + FIRST_15;
 
   const res = await fetch(url);
   const data = await res.json();
