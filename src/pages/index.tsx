@@ -1,45 +1,67 @@
+import {
+  AspectRatio,
+  Card,
+  Container,
+  Image,
+  Pagination,
+  SimpleGrid,
+  Text,
+} from "@mantine/core";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import {
-  SimpleGrid,
-  Card,
-  Image,
-  Text,
-  Container,
-  AspectRatio,
-} from "@mantine/core";
-import { API_BASE_URL } from "../misc/constants";
-import { Pagination } from "@mantine/core";
+import useSWR from "swr";
+import { InputWithButton } from "../components/Searchbar";
+import { API_BASE_URL, OFFSET } from "../misc/constants";
 import {
   generateOffsetUrl,
-  getTotalPagesForPagination,
   getPokemonIndexFromUrl,
+  getTotalPagesForPagination,
 } from "../misc/helpers";
-import useSWR from "swr";
 
 export default function Home(props: any) {
   const router = useRouter();
   const [pokemon, setPokemon] = useState(props.pokemon.results);
   const [activePage, setPage] = useState(1);
+  const [userQuery, setUserQuery] = useState("");
+  const [queryUrl, setqueryUrl] = useState(
+    `${API_BASE_URL}pokemon?${generateOffsetUrl((activePage - 1) * OFFSET)}`
+  );
 
   const handleClick = (pokemonName: string) => {
     router.push("./" + pokemonName);
   };
 
+  useEffect(() => {
+    if (userQuery.length > 3) {
+      // WITH USERQUERY
+      const url = `${API_BASE_URL}pokemon/${userQuery}?${generateOffsetUrl(
+        (activePage - 1) * OFFSET
+      )}`;
+      setqueryUrl(url);
+    } else {
+      const url = `${API_BASE_URL}pokemon?${generateOffsetUrl(
+        (activePage - 1) * OFFSET
+      )}`;
+      setqueryUrl(url);
+    }
+  }, [activePage, userQuery, setqueryUrl]);
+
   //@ts-ignore
   const fetcher = (...args) => fetch(...args).then((r) => r.json());
-
-  const url = API_BASE_URL + generateOffsetUrl((activePage - 1) * 15);
+  const url = `${API_BASE_URL}pokemon?${generateOffsetUrl(
+    (activePage - 1) * OFFSET
+  )}`;
   const { data, error, isLoading } = useSWR(url, fetcher);
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setPokemon(data.results);
     }
   }, [data]);
 
-  if (error) return "An error has occurred.";
+  if (error) return "An error has occurred. / No Pokemon found";
   if (isLoading) return "Loading...";
 
   if (!pokemon)
@@ -80,12 +102,16 @@ export default function Home(props: any) {
       </Head>
       <main>
         <h1>Pokemon App</h1>
+        <br />
+        <InputWithButton updateQuery={setUserQuery} />
+
+        <br />
         <Pagination
           value={activePage}
           onChange={setPage}
           total={getTotalPagesForPagination(props.pokemon.count)}
         />
-
+        <br />
         <div>
           <Container py="xl">
             <SimpleGrid cols={2}>{pokemonCards}</SimpleGrid>
@@ -98,11 +124,9 @@ export default function Home(props: any) {
 
 // NEXT.JS
 
-// TODO create helper function to generate URL
-
 export async function getStaticProps() {
   // Static Generation for only 15 items not good for SEO
-  const url = API_BASE_URL + generateOffsetUrl(0);
+  const url = `${API_BASE_URL}pokemon?${generateOffsetUrl(0)}`;
 
   const res = await fetch(url);
   const data = await res.json();
