@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
 import {
   SimpleGrid,
@@ -11,6 +12,11 @@ import {
 
 export default function Home(props: any) {
   const { pokemon } = props;
+  const router = useRouter();
+
+  const handleClick = (pokemonName: string) => {
+    router.push("./" + pokemonName);
+  };
 
   if (!pokemon)
     return (
@@ -24,9 +30,8 @@ export default function Home(props: any) {
       key={p.name}
       p="md"
       radius="md"
-      component="a"
-      href="#"
       className={"card"}
+      onClick={() => handleClick(p.name)}
     >
       <AspectRatio ratio={1920 / 1080}>
         <Image
@@ -58,6 +63,8 @@ export default function Home(props: any) {
     </>
   );
 }
+
+// NEXT.JS
 
 const BASE_URL = "https://pokeapi.co/api/v2/";
 const ALL_POKEMON = "pokemon?limit=100000&offset=0";
