@@ -24,28 +24,16 @@ export default function Home(props: any) {
   const [pokemon, setPokemon] = useState(props.pokemon.results);
   const [activePage, setPage] = useState(1);
   const [userQuery, setUserQuery] = useState("");
-  const [queryUrl, setqueryUrl] = useState(
-    `${API_BASE_URL}pokemon?${generateOffsetUrl((activePage - 1) * OFFSET)}`
-  );
 
   const handleClick = (pokemonName: string) => {
     router.push("./" + pokemonName);
   };
 
   useEffect(() => {
-    if (userQuery.length > 3) {
-      // WITH USERQUERY
-      const url = `${API_BASE_URL}pokemon/${userQuery}?${generateOffsetUrl(
-        (activePage - 1) * OFFSET
-      )}`;
-      setqueryUrl(url);
-    } else {
-      const url = `${API_BASE_URL}pokemon?${generateOffsetUrl(
-        (activePage - 1) * OFFSET
-      )}`;
-      setqueryUrl(url);
+    if (userQuery) {
+      router.push("/" + userQuery);
     }
-  }, [activePage, userQuery, setqueryUrl]);
+  }, [activePage, userQuery]);
 
   //@ts-ignore
   const fetcher = (...args) => fetch(...args).then((r) => r.json());
@@ -54,9 +42,9 @@ export default function Home(props: any) {
   )}`;
   const { data, error, isLoading } = useSWR(url, fetcher);
 
+  console.log(data);
   useEffect(() => {
     if (data) {
-      console.log(data);
       setPokemon(data.results);
     }
   }, [data]);

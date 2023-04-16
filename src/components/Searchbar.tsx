@@ -13,11 +13,12 @@ export function InputWithButton(props: any) {
   const [value, setValue] = useState("");
   const [names, setNames] = useState([]);
 
-  const handleChange = (e: any) => {
+  const handleSubmit = (e: any) => {
     // props.updateQuery(e.target.value.trim());
-    console.log(e);
+
     // TODO debounce
-    setValue(e)
+    // Search on just user input
+    props.updateQuery(e.value);
   };
 
   useEffect(() => {
@@ -32,17 +33,15 @@ export function InputWithButton(props: any) {
     fetchData();
   }, []);
 
-//   useEffect(() => {
-//     console.log(value);
-//   }, [value]);
-
   return (
     <Autocomplete
       icon={<IconSearch size="1.1rem" stroke={1.5} />}
       radius="xl"
       size="md"
+      limit="5"
       value={value}
-      onChange={(e) => handleChange(e)}
+      onItemSubmit={(e) => handleSubmit(e)}
+      onChange={setValue}
       data={names.length ? [...names] : ["Asd"]}
       rightSection={
         <ActionIcon
