@@ -1,3 +1,6 @@
+[commits](https://user-images.githubusercontent.com/30233804/232327581-7e2bea3b-8bb5-4f39-a6a0-30d4436cb6e9.PNG)
+
+
 # Brainstorming, (before coding)
 
 #### Techstack:
@@ -32,7 +35,8 @@
 - Search can be done with a autocomplete from ManintUI and the input can be handled with
   debounce from lodash, trim() and min-3 length will be just handled by react, no visual feedback
 
-Project wont be responsible
+Project wont be responsible!
+
 
 #### <img src="Mockup.png" alt/>
 
