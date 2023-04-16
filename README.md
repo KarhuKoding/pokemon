@@ -1,6 +1,6 @@
-before Starting:
+# Brainstorming, (before coding)
 
-## Techstack:
+#### Techstack:
 
 - Next.js (npx create-next-app@latest)
 - Typescript
@@ -8,7 +8,7 @@ before Starting:
 - Page Layout custom css, next.js css modules
 - fetch for requests
 
-## Min-requirements
+#### Min-requirements
 
 - List => index Page, index.js
 - Detail Page => dynamic Page, [pokemonName]
@@ -17,7 +17,7 @@ before Starting:
 - own feature branch, dont push on master
 - I will use the next.js starter porject as foundation
 
-## Problems I see from now:
+#### Problems I see from now:
 
 - I actually want to put the list and the Detail Page on one Page
   so index.js and [pokemonName] should be on one page. I am
@@ -27,15 +27,40 @@ before Starting:
 - No big error handling
 - Stuff that I come up during develompent I will just put in a comment if not nessacary
 
-## Optional-requirement:
+#### Optional-requirement:
 
 - Search can be done with a autocomplete from ManintUI and the input can be handled with
   debounce from lodash, trim() and min-3 length will be just handled by react, no visual feedback
 
 Project wont be responsible
 
-## <img src="Mockup.png" alt/>
+#### <img src="Mockup.png" alt/>
 
 ---
 
-Progress:
+# Progress:
+
+> Please use the Readme to give us a short insight into your approach. That means please describe briefly how you tackled the solution and what core elements of your solution are. You can point us to interesting pieces of code or even parts that you’d like to improve over time.
+
+- finished in excactyl 4 hours
+- 1 index page with pagination and autocomplete search
+- detail page
+
+I did these things in the following order:
+
+1. setup project on main branch
+2. created Layout
+3. created List (Cards in GridContainer)
+4. Detail Page and extracted data
+5. Pagination
+6. Search with Autocomplete
+
+Not so good stuff:
+
+- Waterfall approach
+- run into a view issues since i expected a cleaner api, was pretty nested and a bit weird to get the images
+- approach doesn't use the full potential of next.js, there is just the index page pre-rendered with 15 pokemon, the dynamic page not at all
+- failed to put everything on one side, dedicated detail page approach went faster
+- search doesn't work as it was asked, have chosen a more forward autocompletet apporach
+
+# I haven't checked any typos, I was pretty much excatly at 4 hours with this "documentation"
