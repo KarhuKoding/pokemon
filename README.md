@@ -12,7 +12,7 @@ before Starting:
 
 - List => index Page, index.js
 - Detail Page => dynamic Page, [pokemonName]
-- Pagination
+- Pagination (can get tricky with pre-rendering)
 - reusable code for the request
 - own feature branch, dont push on master
 - I will use the next.js starter porject as foundation
