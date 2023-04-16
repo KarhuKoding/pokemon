@@ -19,7 +19,7 @@ export default function Home(props: any) {
       </React.Fragment>
     );
 
-  const pokemonCards = pokemon.map((p: any) => (
+  const pokemonCards = pokemon.map((p: any, index: number) => (
     <Card
       key={p.name}
       p="md"
@@ -28,11 +28,13 @@ export default function Home(props: any) {
       href="#"
       className={"card"}
     >
-      {/*
-      TODO add pokemon Image
       <AspectRatio ratio={1920 / 1080}>
-          <Image src={p.image} />
-        </AspectRatio> */}
+        <Image
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+            index + 1
+          }.png`}
+        />
+      </AspectRatio>
 
       <Text mt={5}>{p.name}</Text>
     </Card>
@@ -73,6 +75,7 @@ export async function getStaticProps() {
     props: {
       pokemon: data.results,
     },
+
     // TODO set revalidate
   };
 }
