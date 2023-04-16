@@ -1,4 +1,4 @@
-<img src="Mockup.png](https://user-images.githubusercontent.com/30233804/232327581-7e2bea3b-8bb5-4f39-a6a0-30d4436cb6e9.PNG" alt="commits"/>
+<img src="https://user-images.githubusercontent.com/30233804/232327581-7e2bea3b-8bb5-4f39-a6a0-30d4436cb6e9.PNG" alt="commits"/>
 
 # Brainstorming, (before coding)
 
