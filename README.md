@@ -1,38 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+before Starting:
 
-## Getting Started
+## Techstack:
 
-First, run the development server:
+- Next.js (npx create-next-app@latest)
+- Typescript
+- Mantine UI as Component Library (Pagination and Inputs)
+- Page Layout custom css, next.js css modules
+- fetch for requests
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Min-requirements
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- List => index Page, index.js
+- Detail Page => dynamic Page, [pokemonName]
+- Pagination
+- reusable code for the request
+- own feature branch, dont push on master
+- I will use the next.js starter porject as foundation
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Problems I see from now:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- I actually want to put the list and the Detail Page on one Page
+  so index.js and [pokemonName] should be on one page. I am
+  not really sure how to do that with next.js because it is not the recomended way
+- styling will take to long => keep for the end, having this effect on a Detail Card or rendering the details in this was would be aweseome https://poke-holo.simey.me/, but is not required
+- I will keep types to a minimum, just for the GET request, more if there is still time
+- No big error handling
+- Stuff that I come up during develompent I will just put in a comment if not nessacary
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Optional-requirement:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Search can be done with a autocomplete from ManintUI and the input can be handled with
+  debounce from lodash, trim() and min-3 length will be just handled by react, no visual feedback
 
-## Learn More
+Project wont be responsible
 
-To learn more about Next.js, take a look at the following resources:
+## <img src="Mockup.png" alt/>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Progress:
