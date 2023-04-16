@@ -1,9 +1,43 @@
 import Head from "next/head";
+import React from "react";
+import {
+  SimpleGrid,
+  Card,
+  Image,
+  Text,
+  Container,
+  AspectRatio,
+} from "@mantine/core";
 
 export default function Home(props: any) {
   const { pokemon } = props;
 
-  console.log(pokemon);
+  if (!pokemon)
+    return (
+      <React.Fragment>
+        <h1>Something went wrong !</h1>
+      </React.Fragment>
+    );
+
+  const pokemonCards = pokemon.map((p: any) => (
+    <Card
+      key={p.name}
+      p="md"
+      radius="md"
+      component="a"
+      href="#"
+      className={"card"}
+    >
+      {/*
+      TODO add pokemon Image
+      <AspectRatio ratio={1920 / 1080}>
+          <Image src={p.image} />
+        </AspectRatio> */}
+
+      <Text mt={5}>{p.name}</Text>
+    </Card>
+  ));
+
   return (
     <>
       <Head>
@@ -13,6 +47,12 @@ export default function Home(props: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>Pokemon App</main>
+
+      <div>
+        <Container py="xl">
+          <SimpleGrid cols={2}>{pokemonCards}</SimpleGrid>
+        </Container>
+      </div>
     </>
   );
 }
@@ -21,7 +61,7 @@ const BASE_URL = "https://pokeapi.co/api/v2/";
 const ALL_POKEMON = "pokemon?limit=100000&offset=0";
 const FIRST_15 = "pokemon?limit=15&offset=0";
 
-// TODO create helper function to generate URL 
+// TODO create helper function to generate URL
 
 export async function getStaticProps() {
   const url = BASE_URL + FIRST_15;
