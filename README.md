@@ -65,6 +65,6 @@ Not so good stuff:
 - approach doesn't use the full potential of next.js, there is just the index page pre-rendered with 15 pokemon, the dynamic page not at all
 - failed to put everything on one side, dedicated detail page approach went faster
 - search doesn't work as it was asked, have chosen a more forward autocompletet apporach
-- the index.js could be also cleaned up a lot, when catching all pokemon names in getStaticProps and also pass those name to the autocomplete component, so the pagination events would only result in loading "new" images 
+- the index.js could be also cleaned up a lot, by catching all pokemon names in getStaticProps and also pass those name to the autocomplete component, so the pagination events would only result in loading "new" images 
 
 # I haven't checked any typos, I was pretty much excatly at 4 hours with this "documentation"
